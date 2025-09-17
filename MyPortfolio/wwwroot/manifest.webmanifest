@@ -1,0 +1,17 @@
+{
+  "name": "Georgia E Antoniou - Software Tester Portfolio",
+  "short_name": "GA",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/images/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
