@@ -18,6 +18,7 @@ html, body, #app {
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
 }
 
@@ -29,8 +30,9 @@ header {
 }
 
 main {
-    flex: 1;
+    flex-grow: 1;
     background-color: var(--background-light-color);
+    padding: 2rem 0;
 }
 
 footer {
@@ -110,8 +112,8 @@ nav {
 /* Style for the hero section */
 #hero {
     text-align: center;
-    padding: 5rem 0;
-    font-family:serif;
+    padding: 5rem 0 7rem 0;
+    font-family: serif;
 }
 
 .cta-button {
@@ -161,7 +163,7 @@ nav {
     flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
     justify-content: center; /* Centers cards horizontally */
     gap: 2rem; /* Adds space between each card */
-    padding: 2rem;
+    padding: 2rem 2rem 3rem 2rem;
 }
 
 /* Styling for each individual project card */
@@ -217,19 +219,7 @@ nav {
         /* Removes the default padding of the list to align it with the text above */
         padding-left: 1.25rem;
     }
-#about-me {
-    padding: 2rem;
-    
-    
-}
 
-.about-container {
-    display: flex;
-    align-items: flex-start; /* Aligns items to the top */
-    gap: 3rem; /* Creates space between the photo and the text */
-    max-width: 900px;
-    margin: 0 auto; /* Centers the container on the page */
-}
 
 .profile-photo-large {
     width: 250px;
@@ -299,14 +289,15 @@ nav {
 
 
 #contact-me {
-    padding: 3rem 1rem;
+    padding: rem 1rem ;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 3rem auto;
 }
 
     #contact-me h2 {
         text-align: center;
         margin-bottom: 2rem;
+        margin-right:0.5rem;
     }
 
 .form-group {
@@ -349,8 +340,9 @@ nav {
         }
 
 #certifications {
-    margin-top: 3rem;
-    padding-bottom: 2rem;
+    padding: 1rem 1rem;
+    padding-bottom: 3rem;   
+    margin-bottom: 2rem;
 }
 
 .cert-list {
@@ -409,82 +401,310 @@ nav {
     text-decoration: none;
 }
 
-.hamburger-icon {
-    display: none;
-    cursor: pointer;
-    font-size: 2rem;
-    color:white;
-    z-index: 1001; /* Ensure it's above the menu */
+
+
+
+
+
+
+/* --- Skills Section Styles --- */
+#technical-skills {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+
 }
 
+.skills-container {
+    /* Create a responsive 2-column grid for desktop */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px; /* Space between categories */
+    margin-top: 20px;
+}
+
+.skill-category {
+    background-color: #f7f7f7; /* Light background for separation */
+    opacity:70%;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #008080; /* Teal accent line */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .skill-category h3 {
+        font-size: 1.4rem;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+        .skill-category h3 i {
+            color: #008080; /* Match your brand color */
+            margin-right: 10px;
+        }
+
+    .skill-category ul {
+        list-style: none; /* Remove default bullet points */
+        padding: 0;
+    }
+
+    .skill-category li {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 8px 0;
+        /* Custom bullet point with an icon */
+        position: relative;
+        padding-left: 20px;
+    }
+
+        .skill-category li::before {
+            content: "✓"; /* Use a checkmark for a clean look */
+            color: #008080;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+     
+            
+            
+            
+            
+        }
+
+
+
+/* --- Certifications Section Styles --- */
+#certifications {
+    padding: 1rem 1rem;
+   
+}
+
+    #certifications h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+.cert-container {
+    display: grid;
+    opacity: 70%;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
+.cert-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 5px solid #008080;
+}
+
+    .cert-card h3 {
+         
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .cert-card .issuer {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .cert-card p {
+        flex-grow: 1; 
+        margin-bottom: 20px;
+    }
+
+.cert-button {
+    
+    background-color: #008080;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-top: auto; 
+}
+
+    .cert-button:hover {
+        background-color: #005f5f;
+    }
+
+
+/* --- About Container Styling --- */
+.about-container {
+    background-color: white; /* Light background to make the text pop */
+    opacity:60%;
+    padding: 30px 40px; /* Generous padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin: 20px auto 40px auto; /* Add vertical spacing above/below */
+    max-width: 90%; /* Keep the width reasonable for readability */
+    line-height: 1.7; /* Increase line spacing for comfort */
+    /* OPTIONAL: Add an accent border like the skills/certs */
+    border-left: 5px solid #008080; /* Use your primary teal/blue color */
+    text-align:center;
+}
+
+    /* Ensure the paragraph text inside is styled nicely */
+    .about-container p {
+        font-size: 1.05rem;
+        color: #333;
+       
+    }
+
+#about-me h2 i {
+    margin-right: 10px;
+    color: #008080;
+}
+
+#about-me{
+    
+    text-align:center;
+}
+
+/* ========================================================= */
+/* --- 1. BASE MEDIA QUERY: PHONES (Max-width 768px) --- */
+/* ========================================================= */
+/* Your existing mobile-first styles are here. 
+   I've added the crucial grid changes for stacking. */
 
 @media (max-width: 768px) {
 
-    /* 1. Change NAV to Vertical Stack (Crucial Change) */
+    /* --- Existing NAV Adjustments --- */
     nav {
-        /* OVERRIDE: Change to vertical stacking */
         flex-direction: column;
-        /* Ensure content aligns left */
         justify-content: flex-start;
         align-items: flex-start;
         position: relative;
         padding: 1rem;
     }
+    /* ... other existing navigation rules ... */
 
-    /* 2. Position the Hamburger Icon */
-    .hamburger-icon {
-        display: block;
-        font-size: 2rem;
-        color: white;
-        z-index: 1002;
-        /* Absolute positioning is still the easiest way to place it on the top-right corner */
-        position: absolute;
-        top: 1rem; /* Adjust to sit at the top of the header */
-        right: 0rem; /* Space from the right edge */
-        transform: none; /* Reset the center-align transform */
+
+    /* --- NEW GRID ADJUSTMENTS for Phones/Small Tablets --- */
+
+    /* Force the Skills container to a single column for maximum readability */
+    .skills-container {
+        grid-template-columns: 1fr !important;
+        max-width: 90%;
+        margin: 20px auto;
     }
 
-    /* 3. Style the Header Container */
-    .header-container {
-        /* Let the container take the full width below the logo, but only if needed */
-        width: 100%;
-        max-width: 100%; /* Remove previous width restriction */
-        margin-bottom: 0.5rem; /* Small space between the info and the links */
+    /* Force the Certs container to a single column for maximum readability */
+    .cert-container {
+        grid-template-columns: 1fr !important;
+        max-width: 90%;
+        margin: 0 auto;
     }
 
-    /* 4. Style the Navigation List (The links that are toggled) */
-    nav ul {
-        /* OVERRIDE: Ensure it's hidden by default, and takes full width when shown */
-        display: none;
-        flex-direction: column;
-        width: 100%; /* Links take full width below the profile info */
-        padding: 0;
-        gap: 0.5rem; /* Closer spacing for stacked links */
-        /* Remove the fixed/slide-out positioning */
-        position: static;
-        height: auto;
-        background-color: transparent;
-        box-shadow: none;
-        transform: none;
-        transition: none;
+    /* General content padding adjustments */
+    main {
+        padding: 1rem 0.5rem;
     }
 
-        /* 5. Class toggled by Blazor to show the menu (The links are now below) */
-        nav ul.open {
-            display: flex; /* SHOW THE STACKED LIST */
-        }
+   
 
-        /* 6. Ensure links have proper spacing */
-        nav ul li {
-            width: 100%;
-            text-align: left;
-        }
+    /* ... rest of your existing max-width: 768px rules ... */
+}
+
+
+/* ========================================================= */
+/* --- 2. MEDIA QUERY: TABLETS (Min-width 768px) --- */
+/* ========================================================= */
+/* Standard Tablet/Small Laptop Layout */
+@media (min-width: 768px) {
+
+    /* Skills: Switch to 2 columns for wider screens */
+    .skills-container {
+        /* Use auto-fit to decide between 1 or 2 columns based on 400px min width */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        max-width: 900px;
+        margin: 20px auto;
+    }
+
+    /* Certs: Switch to 2 columns */
+    .cert-container {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    /* General Content: Give more horizontal padding */
+    main {
+        padding: 2rem 1.5rem;
+    }
+}
+
+
+/* ========================================================= */
+/* --- 3. MEDIA QUERY: STANDARD PC (Min-width 992px) --- */
+/* ========================================================= */
+/* Typical Desktop/Laptop Layout */
+@media (min-width: 992px) {
+
+    /* Skills: Ensure they look good on standard desktop */
+    .skills-container {
+        max-width: 1000px;
+    }
+
+    /* Certs: Switch to 3 columns to utilize the width */
+    .cert-container {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* About Container: Allow it to spread out more */
+    .about-container {
+        max-width: 800px;
+    }
+}
+
+
+/* ========================================================= */
+/* --- 4. MEDIA QUERY: LARGE MONITORS (Min-width 1400px) --- */
+/* (This covers your request for a very large screen like 35-inch) */
+/* ========================================================= */
+@media (min-width: 1400px) {
+
+    /* Skills: Adjust max width for large monitors if necessary */
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for readability */
+        max-width: 1200px; /* Wider container */
+    }
+
+    /* Certs: The desired 4-column layout is best here */
+    .cert-container {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1400px; /* Ensures the cards don't stretch too wide */
+    }
+
+    /* Main Content: Set a maximum readable width and center it */
+    main {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 3rem;
+    }
+
+    /* Large Text: Make key text slightly bigger for the large screen */
+    .hero-headline {
+        font-size: 3rem;
+    }
+
+    .tagline {
+        font-size: 1.8rem;
+    }
 }
 
 .margin-1-lr{
-    margin:0 1em;
-}
-
-nav ul i {
-    margin-right: 0.5rem; /* Adds space between the icon and the link text */
+    margin: 0 0.5rem;
 }

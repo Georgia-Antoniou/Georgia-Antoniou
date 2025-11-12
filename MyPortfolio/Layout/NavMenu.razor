@@ -8,9 +8,7 @@
             </div>
         </div>
 
-        <div class="hamburger-icon" @onclick="ToggleMenu">
-            <i class="fas fa-bars"></i>
-        </div>
+        
 
         <ul class="@(menuOpen ? "open" : "")">
             <li><NavLink href="/" ActiveClass="active-page" Match="NavLinkMatch.All" @onclick="CloseMenu"><i class="fas fa-home"></i>Home</NavLink></li>
