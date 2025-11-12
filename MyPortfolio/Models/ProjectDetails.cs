@@ -24,16 +24,16 @@ public class ProjectDetails
     public required string Role { get; set; }
     public required string Description { get; set; }
 
-    public required List<Responsibility> Responsibilities { get; set; }
+    public required List<string> Responsibilities { get; set; }
 
     public required List<Artifact> Artifcacts { get; set; }
 }
 
 public class Artifact
 {
-}
+    public string Uri { get; set; }
 
-public class Responsibility
-{
-    public required string Description { get; set; }
+    public string Name { get; set; }
+
+    public string? Icon { get; set; }
 }

@@ -1,25 +1,26 @@
 ﻿@page "/about"
+@inject IJSRuntime JSRuntime
 
 <PageTitle>About</PageTitle>
+
 <section id="about">
     <div id="about-me">
         <h2 class="about-me-title"><em>About me</em></h2>
         <p class="about-text-par">
-            I am an enthusiastic and detail-oriented professional with a passion for quality assurance, holding the ISTQB Foundation Level certification.
-            With a strong foundation in both manual and black-box testing methodologies, I am actively seeking a junior software tester or internship position
-            to apply my skills in a dynamic team environment. My experience as a beta tester at Socra.com and freelance work on platforms like uTest,
-            where I ran test cases for a brand like Rolex, has provided me with invaluable hands-on experience.
-            I bring two years of leadership experience from the hospitality industry, which has honed my analytical, problem-solving,
-            and team training abilities. This diverse background demonstrates my adaptability and commitment to continuous growth.
-            I am ready to contribute my skills to a team dedicated to delivering high-quality products.
-            My diverse educational background and proven track record of quick learning demonstrate my adaptability and commitment to continuous growth.
-            This portfolio website was designed and built by me using HTML and CSS, serving as a practical example of my technical skills and attention to detail.
+            I am an enthusiastic and detail-oriented professional with a passion for quality assurance, holding the ISTQB Foundation Level certification. With a strong foundation in both manual and black-box testing methodologies, I am actively seeking a junior software tester or internship position to apply my skills in a dynamic team environment.
+
+            My experience as a beta tester at Socra.com and freelance work on platforms like uTest, where I ran test cases for a brand like Rolex, has provided me with invaluable hands-on experience. I bring two years of leadership experience from the hospitality industry, which has honed my analytical, problem-solving, and team training abilities. This diverse background demonstrates my adaptability and commitment to continuous growth.
+
+            Recently, I earned a certification in Introduction to C#, expanding my technical toolkit and reinforcing my commitment to learning modern programming languages relevant to software testing and development. I am ready to contribute my skills to a team dedicated to delivering high-quality products.
+
+            My diverse educational background and proven track record of quick learning demonstrate my adaptability and commitment to continuous growth. This portfolio website was designed and built by me using HTML and CSS, serving as a practical example of my technical skills and attention to detail.
         </p>
     </div>
     <div id="technical Skills">
         <h2 class="technical-skills"><em>Technical skills</em></h2>
         <ul class="skills">
             <li>Testing Tools & Methodologies: Exploratory Testing, Manual Testing</li>
+            <li>Programming & Automation: C#, Playwright (Basic)</li>
             <li>Test Management & Bug Tracking: Jira, Zephyr Scale and Azure DevOps</li>
             <li>Performance & API Testing: Basic knowledge of JMeter, Basic knowledge of Postman</li>
             <li>Database: Basic knowledge of PostgreSQL</li>
@@ -30,14 +31,37 @@
         <h2 class="Certifications"><em>Certifications</em></h2>
         <ul class="cert">
             <li>ISTQB Foundation Level Certification </li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/ISTQB-Cert.pdf" target="_blank" class="small-cta-button">View Certificate</a></li>
             <li>Udemy The complete SQL Bootcamp: Go from Zero to Hero  </li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/SQL-CERT.jpg" target="_blank" class="small-cta-button">View Certificate</a> </li>
             <li>Udemy Quick Introduction to Postman and API Testing for Beginners  </li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/Postman-API-testing.pdf" target="_blank" class="small-cta-button">View Certificate</a> </li>
             <li>Udemy The Complete 2024 Software Testing Bootcamp  </li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/UDEMY-CERTIFICATE-QA.pdf" target="_blank" class="small-cta-button">View Certificate</a> </li>
+            <li>Intro to C# </li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/intro_to_c_sharp.pdf" target="_blank" class="small-cta-button">View Certificate</a></li>
+            <li>CSS Certification</li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/CSS-certification.pdf" target="_blank" class="small-cta-button">View Certificate</a> </li>
+            <li>HTML Certification</li>
+            <li class="cert-button"> <a href="assets/pdfs/Certs/HTML-certification.pdf" target="_blank" class="small-cta-button">View Certificate</a> </li>
         </ul>
     </div>
 
 </section>
 
-@code {
+<a class="back-to-top-button small-cta-button" aria-label="Back to Top"
+   @onclick="ScrollToTop"
+   @onclick:preventDefault
+   @onclick:stopPropagation>
+    ↑ Back to Top
+</a>
 
+
+@code {
+    private async Task ScrollToTop()
+    {
+        // This JavaScript call executes window.scrollTo(0, 0);
+        // which forces the browser to scroll to the top left corner (0, 0).
+        await JSRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
 }
