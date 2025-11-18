@@ -1,0 +1,68 @@
+﻿@page "/portfolio/{project}/details"
+@using MyPortfolio.Models
+@inject IConfiguration root
+
+<section class="project-details">
+    <NavLink href="/portfolio" class="back-link">← Back to All Projects</NavLink>
+    @if (details == null)
+    {
+        <p role="alert">Sorry, there's nothing at this address.</p>
+    }
+    else
+    {
+        <h2>@details.Title</h2>
+        <p class="project-role">@details.Role</p>
+
+        <p>
+            @details.Description
+        </p>
+         if(details.Responsibilities is { Count: > 0 })
+        {
+             <h3>My Responsibilities:</h3>
+             <ul>
+                 @foreach (var responsibility in details.Responsibilities)
+                 {
+                     <li>@responsibility</li>
+                 }
+             </ul>
+        }
+        if(details.Artifcacts is { Count: > 0 })
+        {
+            <h3>Key Artifacts:</h3>
+            <div class="project-links">
+                @foreach (var artifact in details.Artifcacts)
+                {
+                    <a href="@artifact.Uri" class="cta-button margin-1-lr" target="_blank"> 
+                        @if(!string.IsNullOrEmpty(artifact.Icon))
+                        {
+                            <i class="@artifact.Icon"></i> <span>&nbsp;</span>
+                        }
+                        @artifact.Name
+                        
+                    </a>
+                }
+               
+               @*  <a href="assets/pdfs/ecommerce-bug-report.pdf" class="cta-button" target="_blank">View Bug Report</a> *@
+            </div>
+        }
+    }
+</section>
+
+@code {
+    [Parameter]
+    public string? Project { get; set; }
+    private ProjectName projectName;
+    private ProjectDetails details;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        projectName = ProjectName.FromEncoded(Project);
+        Console.WriteLine(projectName.Name);
+        details = root.GetSection($"Projects:{projectName.Name}")
+            .Get<ProjectDetails>();
+
+
+    }
+
+}

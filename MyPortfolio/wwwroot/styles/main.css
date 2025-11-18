@@ -1,0 +1,710 @@
+﻿:root {
+    --primary-color: #008b8b;
+    --secondary-color: #6c757d;
+    --background-light-color: rgba(120, 170, 170, 0.9);
+    --background-dark-color: rgba(51, 51, 51, 0.9);
+}
+
+html, body, #app {
+    height: 100%;
+    /*margin: 0;*/
+    background: url("../assets/images/background-image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--background-dark-color);
+    color: white;
+    padding: 1rem;
+    position: relative;
+}
+
+main {
+    flex-grow: 1;
+    background-color: var(--background-light-color);
+    padding: 2rem 0;
+}
+
+footer {
+    padding: 1em;
+    text-align: center;
+    background-color: var(--background-dark-color);
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    //background-color: #333; /* Use a color that matches your header */
+    color: white;
+}
+
+    nav .header-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem; /* This controls the space between your links */
+        margin: 0;
+        padding: 0;
+    }
+
+    nav a {
+        position: relative;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        /* Your new underline hover effect CSS */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }    .header-container {
+        display: flex; /* Enables Flexbox layout */
+        align-items: center; /* Aligns items vertically in the center */
+        gap: 20px; /* Adds space between the photo and your name */
+    }
+    .name-and-title {
+        display: flex;
+        flex-direction: column; /* Stacks the name and title vertically */
+    }
+    .faded {
+        color:rgba(255,255,255,0.7)
+    }
+    .header-photo {
+        /* You can set the size here as before */
+        width: 100px;
+    }
+
+/* Style for the hero section */
+#hero {
+    text-align: center;
+    padding: 5rem 0 7rem 0;
+    font-family: serif;
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    display: inline-block;
+}
+    .cta-button:hover {
+        /* Move the button up by 3 pixels */
+        transform: translateY(-3px);
+        /* You can add a subtle shadow here too for a better effect */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 1.9);
+        
+    }
+/* Base styling for a smaller CTA button */
+.small-cta-button {
+    background-color: var(--primary-color); /* Your primary blue */
+    color: white;
+    padding: 0.6rem 1.2rem; /* Slightly smaller padding */
+    text-decoration: none;
+    border-radius: 9px;
+    border: none;
+    cursor: zoom-in;
+    transition: all 0.3s ease; /* Smooth transitions for hover */
+    font-weight: normal;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+    /* Hover effect for the smaller CTA button */
+    .small-cta-button:hover {
+        background-color: var(--primary-color); /* Darker blue on hover */
+        transform: translateY(-2px); /* Slight lift */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 1.9); /* Subtle shadow */
+    }
+
+
+/* Container for all project cards */
+.project-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
+    justify-content: center; /* Centers cards horizontally */
+    gap: 2rem; /* Adds space between each card */
+    padding: 2rem 2rem 3rem 2rem;
+}
+
+/* Styling for each individual project card */
+.project-card {
+    background-color: rgba(51, 51, 51, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 450px; /* Limits the max width of the card */
+    width: 100%; /* Ensures the card takes up available space */
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    height: fit-content;
+}
+
+    .project-card:hover {
+        transform: translateY(-5px); /* Adds a subtle lift effect on hover */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Project titles and roles */
+    .project-card h3 {
+        color: rgba(120, 170, 170, 0.9);
+        margin-top: 0;
+    }
+    .project-card .cta-button {
+        background-color: rgba(120, 170, 170, 0.9);
+    }
+
+.project-role {
+    font-style: italic;
+    color: rgba(51, 51, 51, 0.9);
+    margin-bottom: 1rem;
+}
+
+/* Project links */
+.project-links {
+    margin-top: 1.5rem;
+}
+
+.project-details {
+    /* Adds space below the details section to separate it from links or buttons */
+    padding: 1.5rem 1.5rem 9rem 1.5rem;
+}
+
+    .project-details h4 {
+        /* Ensures the heading has some space below it */
+        margin-bottom: 0.5rem;
+        color: #555; /* A slightly softer color for the sub-heading */
+    }
+
+    .project-details ul {
+        /* Removes the default padding of the list to align it with the text above */
+        padding-left: 1.25rem;
+    }
+
+
+.profile-photo-large {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.about-text h2 {
+    margin-top: 0;
+    color: #007bff;
+    
+}
+.about-text-par {
+    text-align: start;
+    font-size: 20px;
+}
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: black ;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .back-link:hover {
+        transform: translateX(-5px); /* Adds a subtle animation on hover */
+        color: aliceblue;
+  
+       }
+
+.about-me-title {
+    text-align: center;
+    font-family: serif;
+    font-size: 35px;
+
+}
+.technical-skills {
+    text-align: center;
+    font-family: serif;
+    font-size: 35px;
+}
+.skills {
+    text-align: start;
+    font-size: 20px;
+}
+
+
+.tagline {
+    /* This is a simple example. You can adjust the value as needed. */
+    margin-bottom: 4rem;
+    font-size:21px;
+    margin-top:3rem;
+}
+
+.short-description{
+    font-size: 22px;
+    margin-bottom:4rem;
+}
+
+.active-page {
+    color: var(--primary-color); /* A clear, distinguishing color like green or a light blue */
+    font-weight: bold; /* Makes the text bold for extra emphasis */
+    text-decoration: auto; /* Adds a subtle underline */
+}
+
+
+#contact-me {
+    padding: rem 1rem ;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+    #contact-me h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        margin-right:0.5rem;
+    }
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+.social-links {
+    margin-bottom: 1rem;
+}
+
+    .social-links a {
+        color: white; /* Match your footer text color */
+        font-size: 2rem; /* Adjust the size of the icons */
+        margin: 0 0.5rem;
+       
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+        cursor: grab;
+        display: inline-block;
+    }
+
+        .social-links a:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-5px); /* Adds a subtle lift effect on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+#certifications {
+    padding: 1rem 1rem;
+    padding-bottom: 3rem;   
+    margin-bottom: 2rem;
+}
+
+.cert-list {
+    list-style: none;
+    padding: 0;
+}
+
+    .cert-list li {
+        background-color: #f5f5f5; /* A light background color to make it stand out */
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border-left: 5px solid #007bff; /* A nice highlight bar on the side */
+    }
+
+    .cert-list h4 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+.Certifications {
+    text-align: center;
+    font-family: serif;
+    font-size: 35px;
+}
+.cert {
+    text-align: start;
+    font-size: 20px;
+}
+.cert-link {
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: normal;
+    text-decoration: none;
+    color: black; /* Primary accent color */
+    transition: color 0.3s ease;
+}
+    .cert-link:hover {
+        color: white; /* Darker blue on hover */
+        text-decoration: underline;
+    }
+
+.cert-button{
+    list-style:none;
+    margin-bottom:1.5rem;
+}
+
+.back-to-top-button {
+    /* Fixed positioning keeps it in place while scrolling */
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom of the screen */
+    right: 20px; /* Distance from the right of the screen */
+    /* Ensure it has a slightly higher stacking order */
+    z-index: 1000;
+    /* Inherits styling from .small-cta-button (color, padding, hover) */
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+/* --- Skills Section Styles --- */
+#technical-skills {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+
+}
+
+.skills-container {
+    /* Create a responsive 2-column grid for desktop */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px; /* Space between categories */
+    margin-top: 20px;
+}
+
+.skill-category {
+    background-color: #f7f7f7; /* Light background for separation */
+    opacity:70%;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #008080; /* Teal accent line */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .skill-category h3 {
+        font-size: 1.4rem;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+        .skill-category h3 i {
+            color: #008080; /* Match your brand color */
+            margin-right: 10px;
+        }
+
+    .skill-category ul {
+        list-style: none; /* Remove default bullet points */
+        padding: 0;
+    }
+
+    .skill-category li {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 8px 0;
+        /* Custom bullet point with an icon */
+        position: relative;
+        padding-left: 20px;
+    }
+
+        .skill-category li::before {
+            content: "✓"; /* Use a checkmark for a clean look */
+            color: #008080;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+     
+            
+            
+            
+            
+        }
+
+
+
+/* --- Certifications Section Styles --- */
+#certifications {
+    padding: 1rem 1rem;
+   
+}
+
+    #certifications h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+.cert-container {
+    display: grid;
+    opacity: 70%;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
+.cert-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 5px solid #008080;
+}
+
+    .cert-card h3 {
+         
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .cert-card .issuer {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .cert-card p {
+        flex-grow: 1; 
+        margin-bottom: 20px;
+    }
+
+.cert-button {
+    
+    background-color: #008080;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-top: auto; 
+}
+
+    .cert-button:hover {
+        background-color: #005f5f;
+    }
+
+
+/* --- About Container Styling --- */
+.about-container {
+    background-color: white; /* Light background to make the text pop */
+    opacity:60%;
+    padding: 30px 40px; /* Generous padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin: 20px auto 40px auto; /* Add vertical spacing above/below */
+    max-width: 90%; /* Keep the width reasonable for readability */
+    line-height: 1.7; /* Increase line spacing for comfort */
+    /* OPTIONAL: Add an accent border like the skills/certs */
+    border-left: 5px solid #008080; /* Use your primary teal/blue color */
+    text-align:center;
+}
+
+    /* Ensure the paragraph text inside is styled nicely */
+    .about-container p {
+        font-size: 1.05rem;
+        color: #333;
+       
+    }
+
+#about-me h2 i {
+    margin-right: 10px;
+    color: #008080;
+}
+
+#about-me{
+    
+    text-align:center;
+}
+
+/* ========================================================= */
+/* --- 1. BASE MEDIA QUERY: PHONES (Max-width 768px) --- */
+/* ========================================================= */
+/* Your existing mobile-first styles are here. 
+   I've added the crucial grid changes for stacking. */
+
+@media (max-width: 768px) {
+
+    /* --- Existing NAV Adjustments --- */
+    nav {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: relative;
+        padding: 1rem;
+    }
+    /* ... other existing navigation rules ... */
+
+
+    /* --- NEW GRID ADJUSTMENTS for Phones/Small Tablets --- */
+
+    /* Force the Skills container to a single column for maximum readability */
+    .skills-container {
+        grid-template-columns: 1fr !important;
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    /* Force the Certs container to a single column for maximum readability */
+    .cert-container {
+        grid-template-columns: 1fr !important;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* General content padding adjustments */
+    main {
+        padding: 1rem 0.5rem;
+    }
+
+   
+
+    /* ... rest of your existing max-width: 768px rules ... */
+}
+
+
+/* ========================================================= */
+/* --- 2. MEDIA QUERY: TABLETS (Min-width 768px) --- */
+/* ========================================================= */
+/* Standard Tablet/Small Laptop Layout */
+@media (min-width: 768px) {
+
+    /* Skills: Switch to 2 columns for wider screens */
+    .skills-container {
+        /* Use auto-fit to decide between 1 or 2 columns based on 400px min width */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        max-width: 900px;
+        margin: 20px auto;
+    }
+
+    /* Certs: Switch to 2 columns */
+    .cert-container {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    /* General Content: Give more horizontal padding */
+    main {
+        padding: 2rem 1.5rem;
+    }
+}
+
+
+/* ========================================================= */
+/* --- 3. MEDIA QUERY: STANDARD PC (Min-width 992px) --- */
+/* ========================================================= */
+/* Typical Desktop/Laptop Layout */
+@media (min-width: 992px) {
+
+    /* Skills: Ensure they look good on standard desktop */
+    .skills-container {
+        max-width: 1000px;
+    }
+
+    /* Certs: Switch to 3 columns to utilize the width */
+    .cert-container {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* About Container: Allow it to spread out more */
+    .about-container {
+        max-width: 800px;
+    }
+}
+
+
+/* ========================================================= */
+/* --- 4. MEDIA QUERY: LARGE MONITORS (Min-width 1400px) --- */
+/* (This covers your request for a very large screen like 35-inch) */
+/* ========================================================= */
+@media (min-width: 1400px) {
+
+    /* Skills: Adjust max width for large monitors if necessary */
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for readability */
+        max-width: 1200px; /* Wider container */
+    }
+
+    /* Certs: The desired 4-column layout is best here */
+    .cert-container {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1400px; /* Ensures the cards don't stretch too wide */
+    }
+
+    /* Main Content: Set a maximum readable width and center it */
+    main {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 3rem;
+    }
+
+    /* Large Text: Make key text slightly bigger for the large screen */
+    .hero-headline {
+        font-size: 3rem;
+    }
+
+    .tagline {
+        font-size: 1.8rem;
+    }
+}
+
+.margin-1-lr{
+    margin: 0 0.5rem;
+}

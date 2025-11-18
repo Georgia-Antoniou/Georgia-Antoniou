@@ -1,0 +1,35 @@
+﻿@page "/portfolio"
+@using MyPortfolio.Models
+@inject IConfiguration root
+<PageTitle>Portfolio</PageTitle>
+
+<section class="project-container">
+    @if (projectItems is { Length: > 0 })
+    {
+        foreach (var item in projectItems)
+        {
+            <article class="project-card">
+                <h3>@item</h3>
+                <div class="project-links">
+                    <NavLink href="@($"/portfolio/{item.GetEncoded()}/details")" class="cta-button">View Details</NavLink>
+                </div>
+            </article>
+        }
+    }
+
+</section>
+
+
+@code {
+    private ProjectName[]? projectItems;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        projectItems = root.GetSection("Projects")
+            .Get<Dictionary<string, ProjectDetails>>()
+            .Keys
+            .Select(key => new ProjectName(key))
+            .ToArray();
+    }
+
+}

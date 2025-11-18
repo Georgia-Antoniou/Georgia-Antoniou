@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgia E Antoniou - Software Tester Portfolio</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link href="manifest.webmanifest" rel="manifest" />
+    <!--<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />-->
+    <style>
+        /* Loading screen styles */
+       /* #app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }*/
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 8px solid #e0e0e0;
+            border-top: 8px solid #3f51b5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 18px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-progress-text {
+            font-family: inherit;
+            font-size: 1.3rem;
+            color: #3f51b5;
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <section id="app" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <div class="loading-progress-text">
+            Loading application&hellip;
+        </div>
+    </section>
+    <!--<div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>-->
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+</html>

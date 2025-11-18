@@ -1,0 +1,36 @@
+﻿<header>
+    <nav>
+        <div class="header-container">
+            <img class="header-photo" src="assets/images/myPhoto.png" alt="A professional headshot of me, a software tester.">
+            <div class="name-and-title">
+                <h1>Georgia E Antoniou</h1>
+                <h4 class="faded">Quality Focused Software Tester</h4>
+            </div>
+        </div>
+
+        
+
+        <ul class="@(menuOpen ? "open" : "")">
+            <li><NavLink href="/" ActiveClass="active-page" Match="NavLinkMatch.All" @onclick="CloseMenu"><i class="fas fa-home"></i>Home</NavLink></li>
+            <li><NavLink href="/portfolio" ActiveClass="active-page" @onclick="CloseMenu"><i class="fa-solid fa-briefcase"></i>Portfolio</NavLink></li>
+            <li><NavLink href="/about" ActiveClass="active-page" @onclick="CloseMenu"><i class="fa-solid fa-image-portrait"></i>About</NavLink></li>
+            <li><NavLink href="/contact" ActiveClass="active-page" @onclick="CloseMenu"><i class="fa-solid fa-square-phone-flip"></i>Contact</NavLink></li>
+        </ul>
+    </nav>
+</header>
+@code {
+    // State variable to track if the mobile menu is open
+    private bool menuOpen = false;
+
+    // Method to switch the state (open -> closed, or closed -> open)
+    private void ToggleMenu()
+    {
+        menuOpen = !menuOpen;
+    }
+
+    // Method to close the menu when a link is clicked
+    private void CloseMenu()
+    {
+        menuOpen = false;
+    }
+}
