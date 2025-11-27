@@ -552,6 +552,7 @@ nav {
     /* OPTIONAL: Add an accent border like the skills/certs */
     border-left: 5px solid #008080; /* Use your primary teal/blue color */
     text-align:center;
+
 }
 
     /* Ensure the paragraph text inside is styled nicely */
@@ -566,9 +567,18 @@ nav {
     color: #008080;
 }
 
-#about-me{
+#about-me {
     
     text-align:center;
+}
+
+#blog h2 i {
+    margin-right: 10px;
+    color: #008080;
+}
+
+#blog {
+    text-align: center;
 }
 
 /* ========================================================= */
@@ -585,7 +595,7 @@ nav {
         justify-content: flex-start;
         align-items: flex-start;
         position: relative;
-        padding: 1rem;
+        padding: 3rem;
     }
     /* ... other existing navigation rules ... */
 
@@ -690,9 +700,8 @@ nav {
 
     /* Main Content: Set a maximum readable width and center it */
     main {
-        max-width: 1600px;
-        margin: 0 auto;
-        padding: 3rem;
+        margin: 0.5rem auto;
+        padding: 17rem;
     }
 
     /* Large Text: Make key text slightly bigger for the large screen */
