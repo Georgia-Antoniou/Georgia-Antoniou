@@ -14,7 +14,7 @@
     <div class="about-container">
         @foreach (var item in Articles)
         {
-            <NavLink Target="_blank" Href="@item.Key" class="blog-button">@item.Value</NavLink>
+            <NavLink Target="_blank" Href="@item.Path" class="blog-button">@item.Title</NavLink>
         }
     </div>
 </section>
@@ -27,41 +27,63 @@
 
 
 @code {
-    private static FrozenDictionary<string, string> Articles = new Dictionary<string, string>
+    private static IReadOnlyList<(string Path, string Title)>? _articles;
+
+    public static IReadOnlyList<(string Path, string Title)> Articles
     {
-        ["assets/pdfs/Articles/Regression_Testing_vs._retesting.pdf"] = "Regression VS Retesting",
-        ["assets/pdfs/Articles/Boundary_Value_Analysis__Equivalence_Partitioning.pdf"] = "Boundary value analysis VS Equivalence Partitioning",
-        ["assets/pdfs/Articles/Severity_VS_Priority.pdf"] = "Severity VS Priority",
-        ["assets/pdfs/Articles/Smoke_Test__VS__Sanity_Test.pdf"] = "Smoke test VS Sanity Test",
-        ["assets/pdfs/Articles/Test_Case_vs._test_scenario.pdf"] = "Test case VS Test scenario",
-        ["assets/pdfs/Articles/The_Bug_Life_Cycle.pdf"] = "Bug life cycle",
-        ["assets/pdfs/Articles/The_Perfect_Bug_Report.pdf"] = "Bug report",
-        ["assets/pdfs/Articles/ATDD.pdf"] = "ATDD",
-        ["assets/pdfs/Articles/Acceptance_Criteria.pdf"] = "Acceptance Criteria",
-        ["assets/pdfs/Articles/Ad-Hoc_vs.__monkey_testing.pdf"] = "Ad Hoc vs. Monkey testing",
-        ["assets/pdfs/Articles/Black_Box_VS_White_Box_VS_Gray_Box.pdf"] = "Black Box VS White Box VS Gray Box",
-        ["assets/pdfs/Articles/Decision_Table_Testing.pdf"] = "Decision Table Testing",
-        ["assets/pdfs/Articles/Error_Guessing_VS_Checklist-Based_Testing.pdf"] = "Error Guessing VS Checklist Based Testing",
-        ["assets/pdfs/Articles/Exploratory_Testing.pdf"] = "Exploratory Testing",
-        ["assets/pdfs/Articles/State_Transition_Testing.pdf"] = "State Transition Testing",
-        ["assets/pdfs/Articles/Static_vs.__dynamic_testing.pdf"] = "Static VS Dynamic Testing",
-        ["assets/pdfs/Articles/Test_Plan_VS_Test_Strategy.pdf"] = "Test Plan VS Test Strategy",
-        ["assets/pdfs/Articles/The_Anatomy_of_a_User_Story.pdf"] = "User Story",
-        ["assets/pdfs/Articles/The_Software_Testing_Life_Cycle_(STLC).pdf"] = "Software Testing Life Cycle",
-        ["assets/pdfs/Articles/Entry_Criteria_VS__Exit_Criteria.pdf"] = "Entry criteria VS Exit criteria",
-        ["assets/pdfs/Articles/Estimation_Techniques.pdf"] = "Estimation Techniques",
-        ["assets/pdfs/Articles/The_Test_Pyramid.pdf"] = "The Test Pyramid",
-        ["assets/pdfs/Articles/The_Agile_Testing_Quadrants.pdf"] = "Testing Quadrants",
-        ["assets/pdfs/Articles/Test_Completion_Report.pdf"] = "Test Completion Report",
-        ["assets/pdfs/Articles/Test_Case_Prioritization.pdf"] = "Test Case Prioritization",
-        ["assets/pdfs/Articles/Errors_Defects__Failures.pdf"] = "Errors,Defects,Failures",
-        ["assets/pdfs/Articles/Shift_Left_Testing.pdf"] = "Shift Left testing",
-        ["assets/pdfs/Articles/TDD_vs._bdd.pdf"] = "TDD vs. BDD",
-        ["assets/pdfs/Articles/The_7_Principles_of_Testing.pdf"] = "Principles of Testing",
-        ["assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_1.pdf"] = "The QA Mythbuster Series Episode 1",
-        ["assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_2.pdf"] = "The QA Mythbuster Series Episode 2",
-        ["assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_3.pdf"] = "The QA Mythbuster Series Episode 3"
-    }.ToFrozenDictionary();
+        get
+        {
+            if (_articles == null)
+            {
+                var articles = new List<(string, string)>
+                {
+                    #region Articles
+                    ("assets/pdfs/Articles/Regression_Testing_vs._retesting.pdf", "Regression VS Retesting"),
+                    ("assets/pdfs/Articles/Boundary_Value_Analysis__Equivalence_Partitioning.pdf", "Boundary value analysis VS Equivalence Partitioning"),
+                    ("assets/pdfs/Articles/Severity_VS_Priority.pdf", "Severity VS Priority"),
+                    ("assets/pdfs/Articles/Smoke_Test__VS__Sanity_Test.pdf", "Smoke test VS Sanity Test"),
+                    ("assets/pdfs/Articles/Test_Case_vs._test_scenario.pdf", "Test case VS Test scenario"),
+                    ("assets/pdfs/Articles/The_Bug_Life_Cycle.pdf", "Bug life cycle"),
+                    ("assets/pdfs/Articles/The_Perfect_Bug_Report.pdf", "Bug report"),
+                    ("assets/pdfs/Articles/ATDD.pdf", "ATDD"),
+                    ("assets/pdfs/Articles/Acceptance_Criteria.pdf", "Acceptance Criteria"),
+                    ("assets/pdfs/Articles/Ad-Hoc_vs.__monkey_testing.pdf", "Ad Hoc vs. Monkey testing"),
+                    ("assets/pdfs/Articles/Black_Box_VS_White_Box_VS_Gray_Box.pdf", "Black Box VS White Box VS Gray Box"),
+                    ("assets/pdfs/Articles/Decision_Table_Testing.pdf", "Decision Table Testing"),
+                    ("assets/pdfs/Articles/Error_Guessing_VS_Checklist-Based_Testing.pdf", "Error Guessing VS Checklist Based Testing"),
+                    ("assets/pdfs/Articles/Exploratory_Testing.pdf", "Exploratory Testing"),
+                    ("assets/pdfs/Articles/State_Transition_Testing.pdf", "State Transition Testing"),
+                    ("assets/pdfs/Articles/Static_vs.__dynamic_testing.pdf", "Static VS Dynamic Testing"),
+                    ("assets/pdfs/Articles/Test_Plan_VS_Test_Strategy.pdf", "Test Plan VS Test Strategy"),
+                    ("assets/pdfs/Articles/The_Anatomy_of_a_User_Story.pdf", "User Story"),
+                    ("assets/pdfs/Articles/The_Software_Testing_Life_Cycle_(STLC).pdf", "Software Testing Life Cycle"),
+                    ("assets/pdfs/Articles/Entry_Criteria_VS__Exit_Criteria.pdf", "Entry criteria VS Exit criteria"),
+                    ("assets/pdfs/Articles/Estimation_Techniques.pdf", "Estimation Techniques"),
+                    ("assets/pdfs/Articles/The_Test_Pyramid.pdf", "The Test Pyramid"),
+                    ("assets/pdfs/Articles/The_Agile_Testing_Quadrants.pdf", "Testing Quadrants"),
+                    ("assets/pdfs/Articles/Test_Completion_Report.pdf", "Test Completion Report"),
+                    ("assets/pdfs/Articles/Test_Case_Prioritization.pdf", "Test Case Prioritization"),
+                    ("assets/pdfs/Articles/Errors_Defects__Failures.pdf", "Errors,Defects,Failures"),
+                    ("assets/pdfs/Articles/Shift_Left_Testing.pdf", "Shift Left testing"),
+                    ("assets/pdfs/Articles/TDD_vs._bdd.pdf", "TDD vs. BDD"),
+                    ("assets/pdfs/Articles/The_7_Principles_of_Testing.pdf", "Principles of Testing"),
+                    ("assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_1.pdf", "The QA Mythbuster Series Episode 1"),
+                    ("assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_2.pdf", "The QA Mythbuster Series Episode 2"),
+                    ("assets/pdfs/Articles/The_QA_Mythbuster_Series_Episode_3.pdf", "The QA Mythbuster Series Episode 3")
+                    #endregion
+                };
+                articles.Reverse();
+                _articles = articles.AsReadOnly();
+            }
+            return _articles;
+        }
+    }
+
+
+
+
+
+
     private async Task ScrollToTop()
     {
         // This JavaScript call executes window.scrollTo(0, 0);
