@@ -3,7 +3,7 @@ param(
 [string] $RootPath
 )
 
-$githubUrl = "https://github.com/Georgia-Antoniou/Georgia-Antoniou/commit/"
+$githubUrl = "https://github.com/Georgia-Antoniou/Georgia-Antoniou/commit"
 
 if([string]::IsNullOrWhitespace($RootPath))
 {
