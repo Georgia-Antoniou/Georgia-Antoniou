@@ -12,7 +12,15 @@
         </p>
     </div>
     <div class="about-container">
-        @foreach (var item in Articles)
+        <div style="text-align:center;">
+            <input placeholder="               Search..."
+                       @bind="searchText" @bind:event="oninput"
+                       style="height:2rem; border: 0.2rem solid var(--primary-color)"
+                       />
+
+            <br />
+        </div>
+        @foreach (var item in Articles.Where(x => searchText == null || x.Title.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)))
         {
             <NavLink Target="_blank" Href="@item.Path" class="blog-button">@item.Title</NavLink>
         }
@@ -27,6 +35,8 @@
 
 
 @code {
+
+    private string? searchText;
     private static IReadOnlyList<(string Path, string Title)>? _articles;
 
     public static IReadOnlyList<(string Path, string Title)> Articles
@@ -78,9 +88,6 @@
             return _articles;
         }
     }
-
-
-
 
 
 
