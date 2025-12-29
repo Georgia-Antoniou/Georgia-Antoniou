@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPortfolio", "MyPortfolio\MyPortfolio.csproj", "{82336A43-D3AE-44B8-8D32-86C6FCE45FDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeorgiaAntoniou.UI.Tests", "GeorgiaAntoniou.UI.Tests\GeorgiaAntoniou.UI.Tests.csproj", "{6046C88D-A5C3-4C8A-B055-926F6136D7BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{A539C625-667E-456E-BDB2-BCC9EFB350DC}"
+	ProjectSection(SolutionItems) = preProject
+		tools\publish.ps1 = tools\publish.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
