@@ -3,6 +3,8 @@ param(
 [string] $RootPath
 )
 
+$githubUrl = "https://github.com/Georgia-Antoniou/Georgia-Antoniou/commit/"
+
 if([string]::IsNullOrWhitespace($RootPath))
 {
     $RootPath = "C:\Users\Georgia\source\repos\";
@@ -31,7 +33,7 @@ $originalFolder = $pwd
 
 Set-Location $githubWebSite
 git add . 
-$deployMessage = "Deploy " + (Get-Date) + [Environment]::NewLine + "Hash: $commitHash" + [Environment]::NewLine + "Message: $commitMessage";
+$deployMessage = "Deploy " + (Get-Date) + [Environment]::NewLine + "Hash: $githubUrl/$commitHash" + [Environment]::NewLine + "Message: $commitMessage";
 git commit -m $deployMessage
 git push origin
 
