@@ -1,0 +1,82 @@
+﻿using Microsoft.Playwright;
+
+namespace Personal_Portfolio_test
+{
+    public class PortfolioTests
+    {
+        private IPlaywright _playwright;
+        private IBrowser _browser;
+        private IPage _page;
+
+        [SetUp]
+        public async Task Setup()
+        {
+            _playwright = await Playwright.CreateAsync();
+            _browser = await _playwright.Chromium.LaunchAsync(new()
+            {
+                Headless = false
+            });
+
+            _page = await _browser.NewPageAsync();
+
+        }
+
+        [Test]
+
+        public async Task Correct_Url()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/portfolio");
+            Assert.That(_page.Url, Is.EqualTo("https://georgia-antoniou.github.io/portfolio"));
+
+        }
+
+        [Test]
+        public async Task Validate_Project_cards()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/portfolio");
+            await _page.GetByRole(AriaRole.Link, new() { Name = "View Details" }).First.ClickAsync();
+            Assert.That(_page.Url, Is.EqualTo("https://georgia-antoniou.github.io/portfolio/agile-travel/details"));
+            await _page.GoBackAsync();
+            await _page.WaitForTimeoutAsync(2000);
+            await _page.GetByRole(AriaRole.Link, new() { Name = "View Details" }).Nth(3).ClickAsync();
+            Assert.That(_page.Url, Is.EqualTo("https://georgia-antoniou.github.io/portfolio/socra-dot-com/details"));
+            await _page.WaitForTimeoutAsync(2000);
+        }
+
+        [Test]
+
+        public async Task Validate_Key_Artifacts()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/portfolio/georgia-e-antoniou-portfolio/details");
+            var waitForPageTask = _page.Context.WaitForPageAsync();
+            await _page.GetByRole(AriaRole.Link, new() { Name = "Test Plan" }).ClickAsync();
+            IPage newTabPage = await waitForPageTask;
+            await newTabPage.WaitForLoadStateAsync();
+            string expectedUrl = "https://georgia-antoniou.github.io/assets/pdfs/Personal-portfolio/Portfolio_Test_plan.pdf";
+            Assert.That(newTabPage.Url, Is.EqualTo(expectedUrl));
+            
+        }
+
+        [Test]
+
+        public async Task Validate_Key_Artifacts2()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/portfolio/socra-dot-com/details");
+            var waitForPageTask = _page.Context.WaitForPageAsync();
+            await _page.GetByRole(AriaRole.Link, new() { Name = "The Website" }).ClickAsync();
+            IPage newTabPage = await waitForPageTask;
+            await newTabPage.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            string expectedUrl = "https://socra.com/";
+            Assert.That(newTabPage.Url, Is.EqualTo(expectedUrl));
+
+            await newTabPage.CloseAsync();
+            var waitForPageTask2 = _page.Context.WaitForPageAsync();
+            await _page.GetByRole(AriaRole.Link, new() { Name = "Automation Tests" }).ClickAsync();
+
+            IPage tab2 = await waitForPageTask2;
+            await tab2.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            Assert.That(tab2.Url, Is.EqualTo("https://github.com/Georgia-Antoniou/Socra.UI.Tests/tree/master"));
+
+        }
+    }
+}
