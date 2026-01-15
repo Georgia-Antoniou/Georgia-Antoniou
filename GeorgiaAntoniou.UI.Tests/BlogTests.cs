@@ -67,11 +67,7 @@ namespace Personal_Portfolio_test
             IPage TabPage2 = await waitForPageTask;
             await TabPage2.WaitForLoadStateAsync();
             expectedUrl = "https://georgia-antoniou.github.io/assets/pdfs/Articles/Error_Guessing_VS_Checklist-Based_Testing.pdf";
-            Assert.That(TabPage2.Url, Is.EqualTo(expectedUrl));
-
-
-
-                
+            Assert.That(TabPage2.Url, Is.EqualTo(expectedUrl));     
         }
     }
 }
