@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\assets\pdfs\Articles\" />
+	  <Folder Include="wwwroot\assets\pdfs\Nick_Portfolio\" />
 	  <Folder Include="wwwroot\assets\pdfs\Personal-portfolio\" />
 	</ItemGroup>
 
