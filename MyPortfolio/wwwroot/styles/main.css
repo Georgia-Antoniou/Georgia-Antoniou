@@ -133,6 +133,24 @@ nav {
     font-family: serif;
 }
 
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-button-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+    .cta-button-outline:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
 .cta-button {
     background-color: var(--primary-color);
     color: white;
