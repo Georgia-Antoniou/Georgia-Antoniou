@@ -93,5 +93,55 @@
     </div>-->
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>
+        // Animate timeline items on scroll
+        function observeTimeline() {
+            const items = document.querySelectorAll('.timeline-item');
+            if (items.length === 0) return;
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            items.forEach(function (item) { observer.observe(item); });
+
+            // Flip cards on tap/click for mobile — close previous card
+            document.querySelectorAll('.timeline-card-flip').forEach(function (card) {
+                function flipCard() {
+                    var inner = card.querySelector('.timeline-card-inner');
+                    var wasFlipped = inner.classList.contains('flipped');
+
+                    // Close all other flipped cards
+                    document.querySelectorAll('.timeline-card-inner.flipped').forEach(function (other) {
+                        other.classList.remove('flipped');
+                    });
+
+                    // Toggle the clicked card (if it was already flipped, it stays closed)
+                    if (!wasFlipped) {
+                        inner.classList.add('flipped');
+                    }
+                }
+
+                card.addEventListener('click', flipCard);
+                card.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        flipCard();
+                    }
+                });
+            });
+        }
+
+        // Run after Blazor navigation
+        document.addEventListener('DOMContentLoaded', function () {
+            new MutationObserver(function () { observeTimeline(); })
+                .observe(document.body, { childList: true, subtree: true });
+        });
+    </script>
 </body>
 </html>
