@@ -1,4 +1,5 @@
 ﻿@page "/contact"
+@inject HttpClient Http
 
 <PageTitle>Contact</PageTitle>
 
@@ -10,32 +11,118 @@
 
     <div class="contact-info">
         <p>Feel free to reach out to me directly with any questions or opportunities.</p>
-        <p><strong>Email:</strong> <a href="mailto:georgiaantoniou96@gmail.com">georgiaantoniou96@gmail.com</a></p>
     </div>
 
-
-    <h2>
-        A contact form coming soon!
-    </h2>
-    @* <form action="mailto:georgiaantoniou96@gmail.com" method="post" enctype="text/plain">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    @if (formState == FormState.Success)
+    {
+        <div class="form-success">
+            <i class="fas fa-check-circle"></i>
+            <p>Thank you for your message! I'll get back to you soon.</p>
+            <button class="small-cta-button" @onclick="ResetForm">Send Another Message</button>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-        </div> 
+    }
+    else
+    {
+        <form @onsubmit="HandleSubmit" @onsubmit:preventDefault>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" @bind="name" required disabled="@isSending" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" @bind="email" required disabled="@isSending" />
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" @bind="message" rows="5" required disabled="@isSending"></textarea>
+            </div>
 
-        <button type="submit" class="cta-button">Send Message</button>
-    </form>*@
+            @if (formState == FormState.Error)
+            {
+                <div class="form-error">
+                    <p><i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again or email me directly.</p>
+                </div>
+            }
+
+            <button type="submit" class="cta-button" disabled="@isSending">
+                @if (isSending)
+                {
+                    <span>Sending...</span>
+                }
+                else
+                {
+                    <span>Send Message</span>
+                }
+            </button>
+        </form>
+    }
 </section>
 
+<div class="contact-fallback-card">
+    <i class="fas fa-envelope"></i>
+    <p>Prefer email? Reach me at <a href="mailto:georgiaantoniou96@gmail.com">georgiaantoniou96@gmail.com</a></p>
+</div>
 
 @code {
+    private string name = string.Empty;
+    private string email = string.Empty;
+    private string message = string.Empty;
+    private bool isSending;
+    private FormState formState = FormState.Default;
 
+    private const string FormspreeEndpoint = "https://formspree.io/f/mlgkorgk";
+
+    private async Task HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(message))
+        {
+            return;
+        }
+
+        isSending = true;
+        formState = FormState.Default;
+
+        try
+        {
+            var formData = new Dictionary<string, string>
+            {
+                ["name"] = name,
+                ["email"] = email,
+                ["message"] = message
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Post, FormspreeEndpoint)
+            {
+                Content = new FormUrlEncodedContent(formData)
+            };
+            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = await Http.SendAsync(request);
+
+            formState = response.IsSuccessStatusCode ? FormState.Success : FormState.Error;
+        }
+        catch
+        {
+            formState = FormState.Error;
+        }
+        finally
+        {
+            isSending = false;
+        }
+    }
+
+    private void ResetForm()
+    {
+        name = string.Empty;
+        email = string.Empty;
+        message = string.Empty;
+        formState = FormState.Default;
+    }
+
+    private enum FormState
+    {
+        Default,
+        Success,
+        Error
+    }
 }
