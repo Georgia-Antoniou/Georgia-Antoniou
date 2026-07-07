@@ -7,7 +7,7 @@ $githubUrl = "https://github.com/Georgia-Antoniou/Georgia-Antoniou/commit"
 
 if([string]::IsNullOrWhitespace($RootPath))
 {
-    $RootPath = "C:\Users\Georgia\source\repos\";
+    $RootPath = "G:\projects";
 }
 
 $commitHash = (& git log -1 --pretty=format:"%H")
