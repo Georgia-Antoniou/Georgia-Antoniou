@@ -1,4 +1,4 @@
-﻿@page "/about"
+@page "/about"
 @inject IJSRuntime JSRuntime
 
 <PageTitle>About</PageTitle>
@@ -7,7 +7,7 @@
     <h2><i class="fas fa-user"></i>  About me</h2>
     <div class="about-container">
         <p>
-            I am an enthusiastic and detail-oriented professional with a passion for quality assurance, holding the ISTQB Foundation Level certification. With a strong foundation in both manual and black-box testing methodologies, I am actively seeking a junior software tester or internship position to apply my skills in a dynamic team environment.
+            I am an enthusiastic and detail-oriented professional with a passion for quality assurance, holding the ISTQB Foundation Level certification. With a strong foundation in manual testing methodologies — and growing hands-on experience applying Generative AI and tools like GitHub Copilot to test smarter — I am actively seeking a junior software tester or internship position to apply my skills in a dynamic team environment.
         </p>
     </div>
 
@@ -15,41 +15,52 @@
         <h2><i class="fas fa-tools"></i> Technical Skills</h2>
         <div class="skills-container">
 
+            <div class="skill-category skill-category--featured">
+                <h3><i class="fas fa-robot"></i> AI-Augmented QA</h3>
+                <ul>
+                    <li><strong>Generative AI for Testing:</strong> Using AI to generate test cases and test data from requirements.</li>
+                    <li><strong>Prompt Engineering:</strong> Writing effective prompts and managing context/tokens for reliable results.</li>
+                    <li><strong>AI Coding Assistants:</strong> GitHub Copilot (IDE and CLI) for automation development, code fixes, and agentic terminal workflows.</li>
+                    <li><strong>Agentic AI Tooling:</strong> Exploring Model Context Protocol (MCP) agents and Claude Code for QA workflows.</li>
+                    <li><strong>Workflow Automation:</strong> Introductory experience with n8n flows integrating tools like Jira.</li>
+                </ul>
+            </div>
+
             <div class="skill-category">
                 <h3><i class="fas fa-cogs"></i> Core Testing & Methodologies</h3>
                 <ul>
-                    <li>**Testing Methodologies:** Manual Testing, Black-Box Testing, Exploratory Testing.</li>
-                    <li>**Validation Scope:** Functional, System, Integration, and UAT coordination.</li>
-                    <li>**Quality Assurance (QA):** Effective Regression Testing execution.</li>
-                    <li>**Non-Functional Assurance:** Familiarity with validating performance and usability.</li>
+                    <li><strong>Testing Methodologies:</strong> Manual Testing, Black-Box Testing, Exploratory Testing.</li>
+                    <li><strong>Validation Scope:</strong> Functional, System, Integration, and UAT coordination.</li>
+                    <li><strong>Quality Assurance (QA):</strong> Effective Regression Testing execution.</li>
+                    <li><strong>Non-Functional Assurance:</strong> Familiarity with validating performance and usability.</li>
                 </ul>
             </div>
 
             <div class="skill-category">
                 <h3><i class="fas fa-code"></i> Test Automation & Programming</h3>
                 <ul>
-                    <li>**Programming Language:** C# </li>
-                    <li>**Automation Tools:** Playwright (Developing and maintaining UI/API automated scripts).</li>
-                    <li>**IDEs:** Familiarity with Visual Studio and JetBrains Rider.</li>
-                    <li>**Version Control:** Basic knowledge of Git/GitHub for code management, branching, committing, and pulling changes.</li>
+                    <li><strong>Programming Language:</strong> C# </li>
+                    <li><strong>Automation Tools:</strong> Playwright (Developing and maintaining UI/API automated scripts).</li>
+                    <li><strong>IDEs:</strong> Familiarity with Visual Studio and JetBrains Rider.</li>
+                    <li><strong>Version Control:</strong> Basic knowledge of Git/GitHub for code management, branching, committing, and pulling changes.</li>
                 </ul>
             </div>
 
             <div class="skill-category">
                 <h3><i class="fas fa-tasks"></i> Test Management & ALM</h3>
                 <ul>
-                    <li>**Project & Issue Tracking:** Jira (Expertise in defect reporting and workflow management).</li>
-                    <li>**Test Case Management:** Zephyr Scale (Skilled in creating, executing, and reporting).</li>
-                    <li>**DevOps Tools:** Familiarity with Azure DevOps.</li>
+                    <li><strong>Project & Issue Tracking:</strong> Jira (Expertise in defect reporting and workflow management).</li>
+                    <li><strong>Test Case Management:</strong> Zephyr Scale (Skilled in creating, executing, and reporting).</li>
+                    <li><strong>DevOps Tools:</strong> Familiarity with Azure DevOps.</li>
                 </ul>
             </div>
 
             <div class="skill-category">
                 <h3><i class="fas fa-database"></i> API, Performance, & Data</h3>
                 <ul>
-                    <li>**API Functional Testing:** Postman </li>
-                    <li>**Performance Testing:** JMeter (Basic knowledge of running load test scenarios).</li>
-                    <li>**Database:** PostgreSQL/SQL (Capable of writing base queries for backend data validation).</li>
+                    <li><strong>API Functional Testing:</strong> Postman </li>
+                    <li><strong>Performance Testing:</strong> JMeter (Basic knowledge of running load test scenarios).</li>
+                    <li><strong>Database:</strong> PostgreSQL/SQL (Capable of writing base queries for backend data validation).</li>
                 </ul>
             </div>
 
@@ -59,6 +70,15 @@
     <section id="certifications">
         <h2><i class="fas fa-award"></i> Certifications & Training</h2>
         <div class="cert-container">
+
+            <div class="cert-card">
+                <h3>Generative AI in Software Testing</h3>
+                <p class="issuer">Udemy</p>
+                <p>Hands-on training in applying Generative AI to the QA workflow — using AI and GitHub Copilot to generate test cases and test data from requirements, with an introduction to agentic tooling (MCP, Claude Code) and AI-assisted API testing.</p>
+                <a href=/assets/pdfs/Certs/GenAI_AI_Agents_Cert.pdf target="_blank" class="cert-button">
+                    Verify Credential <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
 
             <div class="cert-card">
                 <h3>ISTQB Foundation Level</h3>
