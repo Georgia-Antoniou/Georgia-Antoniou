@@ -1,28 +1,12 @@
 ﻿using Microsoft.Playwright;
 using NUnit.Framework;
+using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Personal_Portfolio_test
 {
-    public class FooterTests
+    public class FooterTests : BaseTest
     {
-        private IPlaywright _playwright;
-        private IBrowser _browser;
-        private IPage _page;
-
-        [SetUp]
-        public async Task Setup()
-        {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new()
-            {
-                Headless = false
-            });
-
-            _page = await _browser.NewPageAsync();
-
-        }
-
         [Test]
 
         public async Task Verify_Copy_right_Content()
@@ -48,13 +32,10 @@ namespace Personal_Portfolio_test
         public async Task Verify_LinkedIn_Link()
         {
             await _page.GotoAsync("https://georgia-antoniou.github.io/");
-            var waitForPageTask = _page.Context.WaitForPageAsync();
-            await _page.WaitForTimeoutAsync(3000);
-            await _page.GetByRole(AriaRole.Link, new() { Name = "LinkedIn" }).ClickAsync();
-            IPage newTabPage = await waitForPageTask;
-            await newTabPage.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            string expectedUrl = "https://www.linkedin.com/in/georgia-antoniou-2629a819a/";
-            Assert.That(newTabPage.Url, Is.EqualTo(expectedUrl));
+            // LinkedIn redirects unauthenticated visitors to an authwall, so we verify the
+            // rendered href the site controls rather than LinkedIn's post-redirect URL.
+            var linkedIn = _page.GetByRole(AriaRole.Link, new() { Name = "LinkedIn" });
+            await Expect(linkedIn).ToHaveAttributeAsync("href", new Regex(@"linkedin\.com/in/georgia-antoniou-2629a819a"));
         }
 
         [Test]
@@ -62,12 +43,9 @@ namespace Personal_Portfolio_test
         {
             await _page.GotoAsync("https://georgia-antoniou.github.io/");
             var waitForPageTask = _page.Context.WaitForPageAsync();
-            await _page.WaitForTimeoutAsync(3000);
             await _page.GetByRole(AriaRole.Link, new() { Name = "GitHub" }).ClickAsync();
             IPage TabPage2 = await waitForPageTask;
-            await TabPage2.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            string expectedUrl = "https://github.com/GeorgiaAntoniou";
-            Assert.That(TabPage2.Url, Is.EqualTo(expectedUrl));
+            await Expect(TabPage2).ToHaveURLAsync("https://github.com/GeorgiaAntoniou");
         }
 
     }

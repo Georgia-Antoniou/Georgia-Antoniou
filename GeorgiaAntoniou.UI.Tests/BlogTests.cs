@@ -1,26 +1,10 @@
 ﻿using Microsoft.Playwright;
+using System.Text.RegularExpressions;
 
 namespace Personal_Portfolio_test
 {
-    public class BlogTests
+    public class BlogTests : BaseTest
     {
-        private IPlaywright _playwright;
-        private IBrowser _browser;
-        private IPage _page;
-
-        [SetUp]
-        public async Task Setup()
-        {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new()
-            {
-                Headless = false
-            });
-
-            _page = await _browser.NewPageAsync();
-
-        }
-
         [Test]
 
         public async Task Verify_SearchBar()
@@ -55,19 +39,13 @@ namespace Personal_Portfolio_test
         public async Task Verify_Article_Links()
         {
             await _page.GotoAsync("https://georgia-antoniou.github.io/blog");
-            var waitForPageTask = _page.Context.WaitForPageAsync();
-            await _page.GetByRole(AriaRole.Link, new() { Name = "State Transition Testing" }).ClickAsync();
-            IPage TabPage1 = await waitForPageTask;
-            await TabPage1.WaitForLoadStateAsync();
-            string expectedUrl = "https://georgia-antoniou.github.io/assets/pdfs/Articles/State_Transition_Testing.pdf";
-            Assert.That(TabPage1.Url, Is.EqualTo(expectedUrl));
+            // Article links open PDFs in a new tab. Headless Chromium treats PDF links as
+            // downloads and never navigates the tab, so we assert the rendered href instead.
+            var stateTransition = _page.GetByRole(AriaRole.Link, new() { Name = "State Transition Testing" });
+            await Expect(stateTransition).ToHaveAttributeAsync("href", new Regex(@"assets/pdfs/Articles/State_Transition_Testing\.pdf$"));
 
-            waitForPageTask = _page.Context.WaitForPageAsync();
-            await _page.GetByRole(AriaRole.Link, new() { Name = "Error Guessing VS Checklist Based Testing" }).ClickAsync();
-            IPage TabPage2 = await waitForPageTask;
-            await TabPage2.WaitForLoadStateAsync();
-            expectedUrl = "https://georgia-antoniou.github.io/assets/pdfs/Articles/Error_Guessing_VS_Checklist-Based_Testing.pdf";
-            Assert.That(TabPage2.Url, Is.EqualTo(expectedUrl));     
+            var errorGuessing = _page.GetByRole(AriaRole.Link, new() { Name = "Error Guessing VS Checklist Based Testing" });
+            await Expect(errorGuessing).ToHaveAttributeAsync("href", new Regex(@"assets/pdfs/Articles/Error_Guessing_VS_Checklist-Based_Testing\.pdf$"));
         }
     }
 }

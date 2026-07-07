@@ -1,26 +1,10 @@
 ﻿using Microsoft.Playwright;
+using System.Text.RegularExpressions;
 
 namespace Personal_Portfolio_test
 {
-    public class PortfolioTests
+    public class PortfolioTests : BaseTest
     {
-        private IPlaywright _playwright;
-        private IBrowser _browser;
-        private IPage _page;
-
-        [SetUp]
-        public async Task Setup()
-        {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new()
-            {
-                Headless = false
-            });
-
-            _page = await _browser.NewPageAsync();
-
-        }
-
         [Test]
 
         public async Task Correct_Url()
@@ -38,7 +22,7 @@ namespace Personal_Portfolio_test
             Assert.That(_page.Url, Is.EqualTo("https://georgia-antoniou.github.io/portfolio/agile-travel/details"));
             await _page.GoBackAsync();
             await _page.WaitForTimeoutAsync(2000);
-            await _page.GetByRole(AriaRole.Link, new() { Name = "View Details" }).Nth(3).ClickAsync();
+            await _page.GetByRole(AriaRole.Link, new() { Name = "View Details" }).Nth(4).ClickAsync();
             Assert.That(_page.Url, Is.EqualTo("https://georgia-antoniou.github.io/portfolio/socra-dot-com/details"));
             await _page.WaitForTimeoutAsync(2000);
         }
@@ -48,13 +32,10 @@ namespace Personal_Portfolio_test
         public async Task Validate_Key_Artifacts()
         {
             await _page.GotoAsync("https://georgia-antoniou.github.io/portfolio/georgia-e-antoniou-portfolio/details");
-            var waitForPageTask = _page.Context.WaitForPageAsync();
-            await _page.GetByRole(AriaRole.Link, new() { Name = "Test Plan" }).ClickAsync();
-            IPage newTabPage = await waitForPageTask;
-            await newTabPage.WaitForLoadStateAsync();
-            string expectedUrl = "https://georgia-antoniou.github.io/assets/pdfs/Personal-portfolio/Portfolio_Test_plan.pdf";
-            Assert.That(newTabPage.Url, Is.EqualTo(expectedUrl));
-            
+            // The Test Plan opens a PDF in a new tab. Headless Chromium treats PDF links as
+            // downloads and never navigates the tab, so we assert the rendered href instead.
+            var testPlan = _page.GetByRole(AriaRole.Link, new() { Name = "Test Plan" });
+            await Expect(testPlan).ToHaveAttributeAsync("href", new Regex(@"assets/pdfs/Personal-portfolio/Portfolio_Test_plan\.pdf$"));
         }
 
         [Test]

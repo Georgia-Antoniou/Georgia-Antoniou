@@ -2,25 +2,8 @@
 
 namespace Personal_Portfolio_test
 {
-    public class ContactTests
+    public class ContactTests : BaseTest
     {
-        private IPlaywright _playwright;
-        private IBrowser _browser;
-        private IPage _page;
-
-        [SetUp]
-        public async Task Setup()
-        {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new()
-            {
-                Headless = false
-            });
-
-            _page = await _browser.NewPageAsync();
-
-        }
-
         [Test]
 
         public async Task Verify_Contact_Heading() 
@@ -40,6 +23,39 @@ namespace Personal_Portfolio_test
             string? hrefValue = await emailLink.GetAttributeAsync("href");
             Assert.That(hrefValue, Is.EqualTo("mailto:georgiaantoniou96@gmail.com"));
 
+        }
+
+        [Test]
+        public async Task Submitting_Valid_Form_Shows_Thank_You_Message()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/contact");
+
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "Name:" }).FillAsync("Test User");
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "Email:" }).FillAsync("test@example.com");
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "Message:" }).FillAsync("Automated exploratory test message.");
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Send Message" }).ClickAsync();
+
+            var thankYou = _page.GetByText("Thank you for your message! I'll get back to you soon.");
+            await Expect(thankYou).ToBeVisibleAsync();
+
+            var sendAnother = _page.GetByRole(AriaRole.Button, new() { Name = "Send Another Message" });
+            await Expect(sendAnother).ToBeVisibleAsync();
+        }
+
+        [Test]
+        public async Task Submitting_Empty_Form_Does_Not_Show_Success()
+        {
+            await _page.GotoAsync("https://georgia-antoniou.github.io/contact");
+
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Send Message" }).ClickAsync();
+
+            var thankYou = _page.GetByText("Thank you for your message! I'll get back to you soon.");
+            await Assert.ThatAsync(async () => await thankYou.IsHiddenAsync(), Is.True,
+                "Empty form submission should not display the success message.");
+
+            var sendButton = _page.GetByRole(AriaRole.Button, new() { Name = "Send Message" });
+            await Assert.ThatAsync(async () => await sendButton.IsVisibleAsync(), Is.True,
+                "The contact form should still be visible after an empty submission.");
         }
 
     }
